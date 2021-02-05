@@ -30,7 +30,7 @@ class Measurement_Station(PubAirAPIBase):
             "returnType": self._return_type,
             "numOfRows": params["numOfRows"],
             "pageNo": params["pageNo"],
-            "addr": params["addr"],
+            # "addr": params["addr"], 필수가 아님으로 제거
             "stationName": params["stationName"],
         }
         response = await self._request(method="get", url=end_url, params=query_params)

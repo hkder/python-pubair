@@ -14,7 +14,7 @@ class Ulfptca_Alarm(PubAirAPIBase):
         self._base_url = "http://apis.data.go.kr/B552584/UlfptcaAlarmInqireSvc"
         super().__init__(auth_key, self._base_url, session)
 
-    async def get_ultfptca_alarm_info(self, params):
+    async def get_ulfptca_alarm_info(self, params):
         """
         [Parameter List]
         serviceKey: 서비스키

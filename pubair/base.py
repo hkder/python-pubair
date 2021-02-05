@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import async_timeout
+import socket
 from urllib.parse import unquote
 from typing import Any, Optional
 from .exceptions import PubAirError, APIConnectionError
@@ -11,12 +12,10 @@ class PubAirAPIBase:
         self,
         auth_key: str = None,
         base_url: str = None,
-        request_timeout: int = 10,
         session: aiohttp.ClientSession = None,
     ):
         self._auth_key = unquote(auth_key)
         self._base_url = base_url
-        self._request_timeout = request_timeout
         self._session = session
         self._return_type = "json"
 
@@ -30,10 +29,9 @@ class PubAirAPIBase:
             self._session = aiohttp.ClientSession()
 
         try:
-            with async_timeout.timeout(self._request_timeout):
-                # Network Request
-                response = await self._session.request(method, url, params=params)
-                response.raise_for_status()
+            # Network Request
+            response = await self._session.request(method, url, params=params)
+            response.raise_for_status()
         except asyncio.TimeoutError as exception:
             raise APIConnectionError(
                 "Timeout occurred while connecting to Open API Server"
