@@ -1,6 +1,5 @@
 import asyncio
 from aiohttp import ClientSession
-from urllib.parse import unquote
 from pprint import pprint
 
 from pubair.pubair import PubAir

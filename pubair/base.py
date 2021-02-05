@@ -59,7 +59,7 @@ class PubAirAPIBase:
         if self._session:
             await self._session.close()
 
-    async def __aenter__(self) -> "Measurement_Station":
+    async def __aenter__(self) -> "PubAirAPIBase":
         """Asnyc enter."""
         return self
 
